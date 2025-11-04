@@ -1,17 +1,54 @@
-<div id="stats">
-    <p id="Sähkö"><img href=""> 0</p>
-    <p id="S/s">0 <img href="">/sekunnissa</p>
-    <p id="Cps">0 Klikkausta/sekunnissa</p>
-    <p id="Combo">0/5 1x</p>
-    <p id="Sieluja"></p>
-</div>
-<input type="button" id="Collector">
-
-<div id="upgrades">
-    <input type="button" id="Sähkö" value="<img href=''>">
-    <input type="button" id="Nappi" value="<img href=''>">
-    <input type="button" id="Tuki" value="<img href=''>">
-</div>
-
-
-    
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power_clicker</title>
+    <link rel="stylesheet" href="../Grafiikat/tyylit.css">
+</head>
+<body>
+    <img src="../Grafiikat/Kuvat/Collector.png" id="Collector">
+    <div id="Stats_panel">
+        <div id="stats">
+            <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
+            <span id="Sähkö">0</span><br>
+            <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
+            <span id="S/s">0/sekunnissa</span><br>
+            <img src="../Grafiikat/Kuvat/Klikkaukset.png">
+            <span id="Cps">0/sekunnissa</span><br>
+            <img src="../Grafiikat/Kuvat/Combo.png">
+            <span id="Combo">Combo 0/5 1x</span><br>
+            <span id="Sieluja" hidden></span>
+        </div>
+    </div>
+    <div id="upgrades">
+        <img src="../Grafiikat/Kuvat/Sahko_upgrade.png" onclick="AvaaSahkoKauppa()">
+        <img src="../Grafiikat/Kuvat/Collector_upgrade.png">
+        <img src="../Grafiikat/Kuvat/Tuki_upgrade.png">
+    </div>
+    <div id="SahkoKauppa">
+        <span>Sähkö Kauppa</span><br>
+        <img src="../Grafiikat/Kuvat/Mahtava_sähkö.png">
+        <span id="Sähkövoima">Mahtava sähkövoima: +1 Sähköä per <img src="../Grafiikat/Kuvat/Klikkaukset.png"></span><br>
+        <span id="Sähkövoima_hinta">10 <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö"></span>
+        <br>
+        <img src="../Grafiikat/Kuvat/Ultimaattinen_sähkö.png">
+        <span id="Ultimaattinen_sähkö">Ultimaattinen sähkö: + 1x Sähköä per <img src="../Grafiikat/Kuvat/Klikkaukset.png"></span><br>
+        <span id="Ultimaattinen_sähkö_hinta">1000 <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö"></span>
+        <br>
+        <img src="../Grafiikat/Kuvat/Voimakkaampi_combo.png">
+        <span id="">Voimakkaampi combo: + 1x kerroin per <img src="../Grafiikat/Kuvat/Combo.png"></span><br>
+        <span id="">7500 <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö"></span>
+        <br>
+        <img src="../Grafiikat/Kuvat/">
+        <span id="">Ikuinen combo: +1 sekuntti combon elinaikaa</span><br>
+        <span id="">25000 <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö"></span>
+        <br>
+        <img src="../Grafiikat/Kuvat/Sähkö_Arvo.png">
+        <span id="Sähköarvo">Sähköarvo: +1% alennusta sähkötuotteille</span><br>
+        <span id="Sähköarvo_hinta">100000 <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö"></span>
+        <br>
+    </div>
+</body>
+    <script src="../Koodi/Koodi.js"></script>
+</html>
