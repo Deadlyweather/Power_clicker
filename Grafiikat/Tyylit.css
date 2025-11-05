@@ -46,7 +46,7 @@ body {
     height: 100px;
     cursor: pointer;
 }
-#SahkoKauppa {
+#SahkoKauppa, #CollectorKauppa, #TukiKauppa {
     position: fixed;
     top: 15%;
     left: 75%;
@@ -57,4 +57,20 @@ span {
     color: white;
     text-shadow: 0px 0px 5px greenyellow;
     margin: 5px;
+}
+#Pistorasia {
+    position: fixed;
+    top: 75%;
+    left: 5%;
+    cursor: default;
+}
+#Haarukka {
+    position: fixed;
+    top: 5%;
+    left: 70%;
+    cursor: default;
+}
+[id^="kuva"] {
+    outline: 1px solid white;
+    box-shadow: inset 0 0 10px greenyellow, 0 0 10px greenyellow;
 }
