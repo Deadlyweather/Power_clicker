@@ -70,7 +70,10 @@ span {
     left: 70%;
     cursor: default;
 }
-[id^="kuva"] {
-    outline: 1px solid white;
-    box-shadow: inset 0 0 10px greenyellow, 0 0 10px greenyellow;
+
+#title {
+    font-size: 20px;
+}
+img[onclick] {
+    cursor: pointer;
 }

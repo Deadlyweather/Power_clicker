@@ -1,30 +1,14 @@
 Peli:
-    Valitse paikka napille ja arvoille ja kaupalle
-    Selvitä miten hankit sieluja
-    Keksi lopetus
-    Luo taivas
-    Tee Melvin taistelu
+    Luo vaihe 1
+    Luo vaihe 2
+    Luo vaihe 3
+    Luo lopetus
 Grafiikka:
-    Piirrä sähkö
-    Piirrä click
-    Piirrä tausta
-    Piirrä Nappi
-    Piirrä sielu
-    Piirrä Näyttö
-    Piirrä Kauppa
-    Piirrä Tuotteet
-    Piirrä Melvin
-    Piirrä Parannus nappi
-    Piirrä Ohjukset
-    Piirrä Loppu ruutu
-    Piirrä Taivas
-    Piirrä Kuolema
+    Rakenna objektit
 Koodi:
     Tuotanto systeemit
     Kauppa systeemit
     Skaalaus
-    Combo systeemi
-    Kerroin systeemi
     Melvin taistelu
     Siirtymät
 
