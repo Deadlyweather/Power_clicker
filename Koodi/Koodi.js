@@ -8,21 +8,14 @@ let sieluja = 0;
 const collector = document.getElementById('Collector');
 
 // hidden stats
-let buttonCooldown = 10000
-let comboKerroin = 1;
 let klikkaukset = 0;
-let comboKesto = 500;
 let maxCombo = 5;
 let comboTimer;
-
-// autoclicker
-let autoclikerActive = false;
-let autoclickerInterval = 1001000;
 
 // clicker
 collector.addEventListener('click', () => {
     if (collector.disabled) return;
-    sähkö += sähköPerKlikkaus * comboKerroin;
+    sähkö += sähköPerKlikkaus * comboKerroin * kerroin;
     document.getElementById("Sähkö").innerText = sähkö;
 
     klikkaukset += 1;
@@ -38,8 +31,7 @@ collector.addEventListener('click', () => {
     comboTimer = setTimeout(() => {
         combo = 0;
         comboKerroin = 1;
-        document.getElementById("Combo").innerText =
-            "Combo " + combo + " / " + maxCombo + " " + comboKerroin + "x";
+        document.getElementById("Combo").innerText = "Combo " + combo + " / " + maxCombo + " " + comboKerroin + "x";
     }, comboKesto);
     document.getElementById("Collector").disabled = true;
     setTimeout(() => {
@@ -60,7 +52,12 @@ setInterval(() => {
     } else {
         klikkauksetPerSekunti = 0;
     }
+    varkaukset += 1 * ostot12
+    sähkö += SähköPerSekuntti*comboKerroin*Äijä_kerroin
+    sähkö += varkaukset*comboKerroin
     document.getElementById("Cps").innerText = klikkauksetPerSekunti + "/sekunnissa";
+    document.getElementById("Sähkö").innerText = sähkö
+    document.getElementById("Auto_Sahko").innerText = SähköPerSekuntti*comboKerroin*Äijä_kerroin + varkaukset*comboKerroin
 }, 1000);
 
 // Sähkökauppa
@@ -76,45 +73,112 @@ function AvaaSahkoKauppa() {
 // Sähkökauppa
 let sähköPerKlikkaus = 1;
 let ostot1 = 0
-// esine 1
+
+let kerroin = 1
+let ostot2 = 0
+
+let comboKerroin = 1;
+let ostot3 = 0
+
+let comboKesto = 10;
+let ostot4 = 0
+
+let alennus = 0
+let ostot5 = 0
+
+// Collectorkauppa
+let buttonCooldown = 10000
+let ostot6 = 0
+
+let autoclikerActive = false;
+let autoclickerInterval = 1001000;
+let ostot7 = 0
+
+let onnekaspainallus = 0
+let ostot8 = 0
+
+let comboPerKlikkaus = 1
+let ostot9 = 0
+
+let Forking = false
+let ostot10 = 0
+
+// Tukikauppa
+let SähköPerSekuntti = 0
+let ostot11 = 0
+
+let varkaukset = 0
+let ostot12 = 0
+
+let Äijä_kerroin = 1
+let ostot13 = 0
+
+let Spawner = 0
+let ostot14 = 0
+
+let Pistorasia = false;
+let ostot15 = 0
+
+let ostot16 = 0
+
 function Ostatuote1() {
-    if (sähkö >= 10)
-        sähkö -= 10*(1.00-alennus)
-        document.getElementById("Sähkö") = sähkö
-        ostot1 += 1
-        document.getElementById("ostot1") = ostot1
-        sähköPerKlikkaus += 1
-    // Hinta: 10 Sähköä
-    // Toiminto: +1 Sähköä per klikkaus
-    // Ostoraja: 0 = ei rajaa
+    let hinta = Math.max(0, 10 * (1 - alennus));
+    if (sähkö >= hinta) {
+        sähkö -= hinta;
+        ostot1 += 1;
+        sähköPerKlikkaus += 1;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot1").innerText = ostot1;
+    }
+    document.getElementById("hinta1").innerText = hinta;
 }
 
-// esine 2
 function Ostatuote2() {
-    // Hinta: 1000 Sähköä
-    // Toiminto: +1x Sähköä per klikkaus
-    // Ostoraja: 0 = ei rajaa
+    let hinta = Math.max(0, 1000 * (1 - alennus));
+    if (sähkö >= hinta) {
+        sähkö -= hinta;
+        ostot2 += 1;
+        kerroin += 1;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot2").innerText = ostot2;
+    }
+    document.getElementById("hinta2").innerText = hinta;
 }
 
-// esine 3
 function Ostatuote3() {
-    // Hinta: 100000 Sähköä
-    // Toiminto: +1x kerroin per klikkaus
-    // Ostoraja: 0 = ei rajaa
+    let hinta = Math.max(0, 100000 * (1 - alennus));
+    if (sähkö >= hinta) {
+        sähkö -= hinta;
+        ostot3 += 1;
+        comboKerroin += 1;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot3").innerText = ostot3;
+    }
+    document.getElementById("hinta3").innerText = hinta;
 }
 
-// esine 4
 function Ostatuote4() {
-    // Hinta: 1000000 Sähköä
-    // Toiminto: +0.01 sekuntti combon elinaikaa
-    // Ostoraja: 0 = ei rajaa
+    let hinta = Math.max(0, 1000000 * (1 - alennus));
+    if (sähkö >= hinta) {
+        sähkö -= hinta;
+        ostot4 += 1;
+        comboKesto += 0.01;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot4").innerText = ostot4;
+    }
+    document.getElementById("hinta4").innerText = hinta;
 }
 
-// esine 5
 function Ostatuote5() {
-    // Hinta: 999999999 Sähköä
-    // Toiminto: +1% alennusta sähkötuotteille
-    // Ostoraja: 101
+    let hinta = Math.max(0, 999999999 * (1 - alennus));
+    if (sähkö >= hinta && ostot5 < 101) {
+        sähkö -= hinta;
+        ostot5 += 1;
+        alennus += 0.01;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot5").innerText = ostot5;
+    }
+    document.getElementById("hinta5").innerText = hinta;
 }
 
 
@@ -129,39 +193,62 @@ function AvaaCollectorKauppa() {
     }
 }
 
-// esine 6
 function Ostatuote6() {
-    // Hinta: 50 Sähköä
-    // Toiminto: -1 sekuntti napin lataukseen
-    // Ostoraja: 1000
+    let hinta = Math.max(0, 50 * (1 - alennus));
+    if (sähkö >= hinta && ostot6 < 1000) {
+        sähkö -= hinta;
+        ostot6 += 1;
+        buttonCooldown = Math.max(0, buttonCooldown - 1000);
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot6").innerText = ostot6;
+    }
+    document.getElementById("hinta6").innerText = hinta;
 }
 
-// esine 7
 function Ostatuote7() {
-    // Hinta: 1000 Sähköä
-    // Toiminto: -1 sekunttia automaattiseen klikkaukseen
-    // Ostoraja: 1000
+    let hinta = Math.max(0, 1000 * (1 - alennus));
+    if (sähkö >= hinta && ostot7 < 1000) {
+        sähkö -= hinta;
+        ostot7 += 1;
+        autoclickerInterval = Math.max(0, autoclickerInterval - 1000);
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot7").innerText = ostot7;
+    }
+    document.getElementById("hinta7").innerText = hinta;
 }
 
-// esine 8
 function Ostatuote8() {
-    // Hinta: 1000 Sähköä
-    // Toiminto: +0.1% mahdollisuus saada 100x Sähköä per klikkaus
-    // Ostoraja: 1000
+    let hinta = Math.max(0, 1000 * (1 - alennus));
+    if (sähkö >= hinta && ostot8 < 1000) {
+        sähkö -= hinta;
+        ostot8 += 1;
+        onnekaspainallus += 0.001;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot8").innerText = ostot8;
+    }
+    document.getElementById("hinta8").innerText = hinta;
 }
 
-// esine 9
 function Ostatuote9() {
-    // Hinta: 100000 Sähköä
-    // Toiminto: Combo kasvaa +1 enemmän per klikkaus
-    // Ostoraja: 5
+    let hinta = Math.max(0, 100000 * (1 - alennus));
+    if (sähkö >= hinta && ostot9 < 5) {
+        sähkö -= hinta;
+        ostot9 += 1;
+        comboPerKlikkaus += 1;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot9").innerText = ostot9;
+    }
+    document.getElementById("hinta9").innerText = hinta;
 }
 
-// esine 10
 function Ostatuote10() {
-    // Hinta: Infinite Sähköä
-    // Toiminto: ???
-    // Ostoraja: 1
+    let hinta = Math.max(0, Infinity * (1 - alennus));
+    if (sähkö >= hinta && ostot10 < 1) {
+        ostot10 += 1;
+        Forking = true;
+        document.getElementById("ostot10").innerText = ostot10;
+    }
+    document.getElementById("hinta10").innerText = hinta;
 }
 
 
@@ -176,43 +263,86 @@ function AvaaTukiKauppa() {
     }
 }
 
-// esine 11
 function Ostatuote11() {
-    // Hinta: 1 Sähkö
-    // Toiminto: +1 Sähköä per sekunti
-    // Ostoraja: 0 = ei rajaa
+    let hinta = Math.max(0, 1 * (1 - alennus));
+    if (sähkö >= hinta && ostot11 < 100) {
+        sähkö -= hinta;
+        ostot11 += 1;
+        SähköPerSekuntti = (SähköPerSekuntti || 0) + 1;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot11").innerText = ostot11;
+    }
+    document.getElementById("hinta11").innerText = hinta;
 }
 
-// esine 12
 function Ostatuote12() {
-    // Hinta: 5000 Sähköä
-    // Toiminto: +1 Sähköä per sekunti per sekunti
-    // Ostoraja: 0 = ei rajaa
+    let hinta = Math.max(0, 5000 * (1 - alennus));
+    if (sähkö >= hinta) {
+        sähkö -= hinta;
+        ostot12 += 1;
+        SähköPerSekuntti = (SähköPerSekuntti || 0) + 1;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot12").innerText = ostot12;
+    }
+    document.getElementById("hinta12").innerText = hinta;
 }
 
-// esine 13
 function Ostatuote13() {
-    // Hinta: 25000 Sähköä
-    // Toiminto: 2x Sähköä äijien tuotantoon
-    // Ostoraja: 0 = ei rajaa
+    let hinta = Math.max(0, 25000 * (1 - alennus));
+    if (sähkö >= hinta) {
+        sähkö -= hinta;
+        ostot13 += 1;
+        Äijä_kerroin *= 2;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot13").innerText = ostot13;
+    }
+    document.getElementById("hinta13").innerText = hinta;
 }
 
-// esine 14
 function Ostatuote14() {
-    // Hinta: 1000000 Sähköä
-    // Toiminto: +100 äijää per sekunti
-    // Ostoraja: 0 = ei rajaa
+    let hinta = Math.max(0, 1000000 * (1 - alennus));
+    if (sähkö >= hinta) {
+        sähkö -= hinta;
+        ostot14 += 1;
+        Spawner += 100;
+        document.getElementById("Sähkö").innerText = sähkö;
+        document.getElementById("ostot14").innerText = ostot14;
+    }
+    document.getElementById("hinta14").innerText = hinta;
 }
 
-// esine 15
 function Ostatuote15() {
-    // Hinta: Infinite Sähköä
-    // Toiminto: Rakenna pistorasia (???)
-    // Ostoraja: 1
+    let hinta = Math.max(0, Infinity * (1 - alennus));
+    if (sähkö >= hinta && ostot15 < 1) {
+        ostot15 += 1;
+        Pistorasia = true;
+        document.getElementById("ostot15").innerText = ostot15;
+    }
+    document.getElementById("hinta15").innerText = hinta;
 }
-const dev_button = r
-dev_button.addEventListener()
+
+function Ostatuote16() {
+    let hinta = Math.max(0, Infinity * (1 - alennus));
+    if (sähkö >= hinta) {
+        ostot16 += 1;
+        document.getElementById("ostot16").innerText = ostot16;
+    }
+    document.getElementById("hinta16").innerText = hinta;
+}
+const dev_button = "m"
+const BulkBuy_button = Shift
+
+document.addEventListener("keydown", function(event) {
+    if (event.key.toLowerCase() === "m") {
+        Devbutton();
+    }
+});
+
 function Devbutton() {
-    sähkö = 999999999999
+    sähkö *= 1000000;
     document.getElementById("Sähkö").innerText = sähkö;
+}
+
+function BulkBuy() {
+    
 }
