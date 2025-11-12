@@ -21,6 +21,7 @@
             <span id="Sieluja" hidden></span>
         </div>
     </div>
+
 <div id="upgrades">
     <img src="../Grafiikat/Kuvat/Sahko_upgrade.png" onclick="AvaaSahkoKauppa()">
     <img src="../Grafiikat/Kuvat/Collector_upgrade.png" onclick="AvaaCollectorKauppa()">
@@ -32,67 +33,68 @@
 
     <img src="../Grafiikat/Kuvat/Mahtava_sähkö.png" onclick="Ostatuote(1)">
     <span id="tuote1">Mahtava sähkövoima: +1 Sähköä per <img src="../Grafiikat/Kuvat/Klikkaukset.png"></span><br>
-    <span id="hinta1">10</span>
+    <span id="hinta1"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot1">0</span><br>
+    <span id="ostot1"></span><br>
 
     <img src="../Grafiikat/Kuvat/Ultimaattinen_sähkö.png" onclick="Ostatuote(2)">
     <span id="tuote2">Ultimaattinen sähkövoima: +1x Sähköä per <img src="../Grafiikat/Kuvat/Klikkaukset.png"></span><br>
-    <span id="hinta2">1000</span>
+    <span id="hinta2"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot2">0</span><br>
+    <span id="ostot2"></span><br>
 
     <img src="../Grafiikat/Kuvat/Voimakkaampi_combo.png" onclick="Ostatuote(3)">
     <span id="tuote3">Voimakkaampi combo: +1x kerroin per <img src="../Grafiikat/Kuvat/Combo.png"></span><br>
-    <span id="hinta3">100000</span>
+    <span id="hinta3"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot3">0</span><br>
+    <span id="ostot3"></span><br>
 
     <img src="../Grafiikat/Kuvat/Ikuinen_Elinikä.png" onclick="Ostatuote(4)">
-    <span id="tuote4">Ikuinen combo: +0.01 sekuntti combon elinaikaa</span><br>
-    <span id="hinta4">1000000</span>
+    <span id="tuote4">Ikuinen combo: +0.001 sekuntti combon elinaikaa</span><br>
+    <span id="hinta4"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot4">0</span><br>
+    <span id="ostot4"></span><br>
 
     <img src="../Grafiikat/Kuvat/Sähkö_Arvo.png" onclick="Ostatuote(5)">
     <span id="tuote5">Sähköarvo: +1% alennusta sähkötuotteille</span><br>
-    <span id="hinta5">999999999</span>
-    <img id="infinite" src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot5">0/101</span><br>
+    <span id="hinta5"></span>
+    <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
+    <span id="ostot5"></span><br>
 </div>
 
 <div id="CollectorKauppa" hidden>
     <span id="title">Collector Kauppa</span><br>
 
     <img src="../Grafiikat/Kuvat/Nopeampi_lataus.png" onclick="Ostatuote(6)">
-    <span id="tuote6">Nopeampi lataus: -1 sekuntti napin lataukseen</span><br>
-    <span id="hinta6">50</span>
+    <span id="tuote6">Nopeampi lataus: -0.001 sekuntti napin lataukseen</span><br>
+    <span id="hinta6"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot6">0/1000</span><br>
+    <span id="ostot6"></span><br>
 
     <img src="../Grafiikat/Kuvat/Kultainen_kosketus.png" onclick="Ostatuote(7)">
-    <span id="tuote7">Kultainen kosketus: -1 sekunttia automaattiseen klikkaukseen</span><br>
-    <span id="hinta7">1000</span>
+    <span id="tuote7">Kultainen kosketus: +1 <img src="../Grafiikat/Kuvat/Klikkaukset.png"> sekunnissa</span><br>
+    <span id="hinta7"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot7">0/1000</span><br>
+    <span id="ostot7"></span><br>
 
     <img src="../Grafiikat/Kuvat/Onnekas_painallus.png" onclick="Ostatuote(8)">
-    <span id="tuote8">Onnekas kosketus: +0.1% mahdollisuus saada 10x <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö"> per <img src="../Grafiikat/Kuvat/Klikkaukset.png"></span><br>
-    <span id="hinta8">1000</span>
+    <span id="tuote8">Onnekas kosketus: +0.1% mahdollisuus saada 10x <img src="../Grafiikat/Kuvat/Sahko.png"> per <img src="../Grafiikat/Kuvat/Klikkaukset.png"></span><br>
+    <span id="hinta8"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot8">0/1000</span><br>
+    <span id="ostot8"></span><br>
 
     <img src="../Grafiikat/Kuvat/Vahva_inferno.png" onclick="Ostatuote(9)">
     <span id="tuote9">Vahva inferno: Combo kasvaa +1 enemmän per <img src="../Grafiikat/Kuvat/Klikkaukset.png"></span><br>
-    <span id="hinta9">100000</span>
+    <span id="hinta9"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot9">0/5</span><br>
+    <span id="ostot9"></span><br>
 
     <img src="../Grafiikat/Kuvat/F.O.R.K.png" onclick="Ostatuote(10)">
     <span id="tuote10">???: Miksi haluaisit tämän?</span><br>
-    <img class="infinite" src="../Grafiikat/Kuvat/Infinite.png">
+    <img src="../Grafiikat/Kuvat/Infinite.png">
+    <span id="hinta10" hidden></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot10">0/1</span><br>
+    <span id="ostot10"></span><br>
 </div>
 
 <div id="TukiKauppa" hidden>
@@ -100,42 +102,42 @@
 
     <img src="../Grafiikat/Kuvat/Äijä.png" onclick="Ostatuote(11)">
     <span id="tuote11">Orjuuta äijiä: +1 <img src="../Grafiikat/Kuvat/Sahko.png"> per sekuntti</span><br>
-    <span id="hinta11">10</span>
+    <span id="hinta11"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot11">0</span><br>
+    <span id="ostot11"></span><br>
 
     <img src="../Grafiikat/Kuvat/Varas.png" onclick="Ostatuote(12)">
     <span id="tuote12">Orjuuta varkaita: +1 <img src="../Grafiikat/Kuvat/Sahko.png"> sekunnissa per sekuntti</span><br>
-    <span id="hinta12">5000</span>
+    <span id="hinta12"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot12">0</span><br>
+    <span id="ostot12"></span><br>
 
     <img src="../Grafiikat/Kuvat/Piiskaaja.png" onclick="Ostatuote(13)">
-    <span id="tuote13">Orjuuta piiskaajia: + 1x <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö"> äijien ja varkaiden tuotantoon</span><br>
-    <span id="hinta13">25000</span>
+    <span id="tuote13">Orjuuta piiskaajia: + 1x <img src="../Grafiikat/Kuvat/Sahko.png"> äijien ja varkaiden tuotantoon</span><br>
+    <span id="hinta13"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot13">0</span><br>
+    <span id="ostot13"></span><br>
 
     <img src="../Grafiikat/Kuvat/Äijä_tehdas.png" onclick="Ostatuote(14)">
     <span id="tuote14">Rakenna Äijä tehdas: +100 äijää per sekuntti</span><br>
-    <span id="hinta14">1000000</span>
+    <span id="hinta14"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot14">0</span><br>
+    <span id="ostot14"></span><br>
 
     <img src="../Grafiikat/Kuvat/Pistorasia_Unlock.png" onclick="Ostatuote(15)">
     <span id="tuote15">Rakenna pistorasia: Mitä sinä tällä tekisit?</span><br>
-    <span id="hinta15" hidden>Infinite</span>
+    <span id="hinta15" hidden></span>
     <img class="infinite" src="../Grafiikat/Kuvat/Infinite.png">
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-    <span id="ostot15">0/1</span><br>
+    <span id="ostot15"></span><br>
 
-    <div id="Anti_softlock">
+    <div id="Anti_softlock" hidden>
         <img src="../Grafiikat/Kuvat/Tyhjää.png" onclick="Ostatuote(16)">
         <span id="tuote16">Leiki loputtomalla sähköllä: Ei tee mitään lol</span><br>
-        <span id="hinta16" hidden>Infinite</span>
+        <span id="hinta16" hidden></span>
         <img class="infinite" src="../Grafiikat/Kuvat/Infinite.png">
         <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
-        <span id="ostot16">0</span>
+        <span id="ostot16"></span>
     </div>
 </div>
 
@@ -148,5 +150,5 @@
     <span id="Vinkki" hidden></span>
 </div>
 </body>
-    <script src="../Koodi/Koodi.js"></script>
+<script src="../Koodi/Koodi.js"></script>
 </html>

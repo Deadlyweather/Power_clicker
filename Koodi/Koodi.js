@@ -1,34 +1,43 @@
 const Stats = [
     {nimi: "Sähkö", määrä: 0, maksimi: Infinity, PerClick: 1},
-    {nimi: "Cps", määrä: 0, maksimi: Infinity, PerClick: 1},
-    {nimi: "Combo", määrä: 0, maksimi: 5, kerroin: 1, elinaika: 0, maksimi_elinaika: 100, PerClick: 1},
+    {nimi: "Cps", määrä: 0, maksimi: Infinity, elinaika: 0, PerClick: 1},
+    {nimi: "Combo", määrä: 0, maksimi: 5, kerroin: 1, elinaika: 0, maksimi_elinaika: 1, PerClick: 1, kerroinPerCombo: 1},
     {nimi: "Sps", määrä: 0, maksimi: Infinity},
     {nimi: "Sielu", määrä: 0, maksimi: Infinity},
 ]
+const Hidden_Stats = [
+    {nimi: "Cooldown", määrä: 10000, aktiivinen: true},
+    {nimi: "Alennus", määrä: 0},
+    {nimi: "Autoclicker", määrä: 0, aktiivinen: false},
+    {nimi: "Onnekas kosketus", määrä: 0, aktiivinen: false},
+    {nimi: "F.O.R.K", aktiivinen: false},
+    {nimi: "varkaudet", määrä: 0},
+    {nimi: "legendaarinen piiskaaja", määrä: 0},
+    {nimi: "tehdas", määrä: 0},
+    {nimi: "Pelottavin Pistorasia", aktiivinen: false}
+]
+const Kauppa = [
+    // Sähkökauppa
+    {id: 1, hinta: 50, ostot: 0, maksimi: Infinity},
+    {id: 2, hinta: 10000, ostot: 0, maksimi: Infinity},
+    {id: 3, hinta: 100000, ostot: 0, maksimi: Infinity},
+    {id: 4, hinta: 750000, ostot: 0, maksimi: 999},
+    {id: 5, hinta: 1000000000, ostot: 0, maksimi: 101},
 
-const Sähkökauppa = [
-    {id: 1, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 2, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 3, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 4, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 5, hinta: 0, ostot: 0, maksimi: Infinity}
-];
+    // Collectorkauppa
+    {id: 6, hinta: 1, ostot: 0, maksimi: 10000},
+    {id: 7, hinta: 100000, ostot: 0, maksimi: Infinity},
+    {id: 8, hinta: 1000000, ostot: 0, maksimi: 1000},
+    {id: 9, hinta: 5000000, ostot: 0, maksimi: Stats[2].maksimi},
+    {id: 10, hinta: Infinity, ostot: 0, maksimi: 1},
 
-const Collectorkauppa = [
-    {id: 6, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 7, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 8, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 9, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 10, hinta: 0, ostot: 0, maksimi: Infinity}
-];
-
-const Tukikauppa = [
-    {id: 11, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 12, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 13, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 14, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 15, hinta: 0, ostot: 0, maksimi: Infinity},
-    {id: 16, hinta: 0, ostot: 0, maksimi: Infinity}
+    // Tukikauppa
+    {id: 11, hinta: 1, ostot: 0, maksimi: 100},
+    {id: 12, hinta: 100, ostot: 0, maksimi: 10},
+    {id: 13, hinta: 666, ostot: 0, maksimi: Infinity},
+    {id: 14, hinta: 1000000, ostot: 0, maksimi: 5},
+    {id: 15, hinta: Infinity, ostot: 0, maksimi: 1},
+    {id: 16, hinta: Infinity, ostot: 0, maksimi: Infinity}
 ];
 
 const Keybinds = [
@@ -38,17 +47,29 @@ const Keybinds = [
     {nimi: "Tukikauppa hotkey", nappi: "y"}
 ]
 function UpdateAll() {
+    //Stats
     document.getElementById("Sähkö").innerText = Stats[0].määrä;
     document.getElementById("Cps").innerText = Stats[1].määrä + "/sekunnissa";
     document.getElementById("Combo").innerText = "Combo " + Stats[2].määrä + "/" + Stats[2].maksimi + " " + Stats[2].kerroin + "x";
-    document.getElementById("Auto_sahko").innerText = Stats[3].määrä + "/sekunnissa";
+    document.getElementById("Auto_Sahko").innerText = Stats[3].määrä + "/sekunnissa";
     document.getElementById("Sieluja").innerText = Stats[4].määrä;
+    //Kaupat
+    Kauppa.forEach(function(item) {
+        document.getElementById("hinta" + item.id).innerText = item.hinta
+        if (item.maksimi === Infinity) {
+            document.getElementById("ostot" + item.id).innerText = item.ostot
+        } else {
+            document.getElementById("ostot" + item.id).innerText = item.ostot + "/" + item.maksimi
+        }
+    })
 }
 function Pressed() {
-    Click()
-    Begincombo()
-    UpdateAll()
-}
+    if (!Hidden_Stats[0].aktiivinen) return;
+        Click()
+        BeginCombo()
+        UpdateAll()
+        cooldown()
+    }
 
 const SK = document.getElementById("SahkoKauppa");
 const CK = document.getElementById("CollectorKauppa");
@@ -59,6 +80,7 @@ function AvaaSahkoKauppa() {
         SK.hidden = false;
         CK.hidden = true;
         TK.hidden = true;
+        UpdateAll()
     }
 }
 
@@ -67,6 +89,7 @@ function AvaaCollectorKauppa() {
         SK.hidden = true;
         CK.hidden = false;
         TK.hidden = true;
+        UpdateAll()
     }
 }
 
@@ -75,34 +98,158 @@ function AvaaTukiKauppa() {
         SK.hidden = true;
         CK.hidden = true;
         TK.hidden = false;
+        UpdateAll()
     }
 }
 
-function Begincombo() {
-    if (Stats[2].määrä < Stats[2].maksimi) {
-    Stats[2].määrä += Stats[2].PerClick
-    Draincombo()
+function BeginCombo() {
+    Stats[2].määrä += Stats[2].PerClick * Stats[2].kerroinPerCombo;
+    if (Stats[2].määrä > Stats[2].maksimi) Stats[2].määrä = Stats[2].maksimi;
+
+    if (!Stats[2].elinaika) {
+        Stats[2].elinaika = setInterval(DrainCombo, Stats[2].maksimi_elinaika);
     }
+
+    UpdateAll();
 }
 
-function Draincombo() {
-    Stats[2].määrä -= 1
+function DrainCombo() {
+    if (Stats[2].määrä > 0) {
+        Stats[2].määrä -= 1;
+    } else {
+        clearInterval(Stats[2].elinaika);
+        Stats[2].elinaika = 0;
+    }
+
+    UpdateAll();
 }
 
 function Click() {
-    Stats[0].määrä += Stats[0].PerClick
+    let Trigger = 0
+    if (Math.random() < 0.01 * Hidden_Stats[3].määrä) {
+        Trigger = 10
+    } else {
+        Trigger = 1
+    }
+    Stats[0].määrä += Stats[0].PerClick * Trigger
+
+    
     Cps()
 }
 
 function Cps() {
     Stats[1].määrä += Stats[1].PerClick
-    Cpsdrain()
+    if (Stats[1].elinaika === 0) {
+        Stats[1].elinaika = setInterval(Cpsdrain, 1000);
+    }
 }
 
 function Cpsdrain() {
-    Stats[1].määrä = 0
+    if (Stats[1].määrä > 0) {
+        Stats[1].määrä = Math.max(0, Stats[1].määrä - Stats[1].PerClick);
+        UpdateAll();
+    } else {
+        clearInterval(Stats[1].elinaika);
+        Stats[1].elinaika = 0;
+    }
 }
 
 function Ostatuote(id) {
+    id = id - 1
+    if (Kauppa[id].hinta /* * Ostokerroin*/<= Stats[0].määrä && Kauppa[id].maksimi - Kauppa[id].ostot - 1 /* * Ostokerroin*/ > 0) {
+        Stats[0].määrä -= Kauppa[id].hinta
+        Kauppa[id].ostot += 1 /* * Ostokerroin*/
+        switch(id + 1) {
+            case 1:
+                Stats[0].PerClick = Kauppa[0].ostot*Kauppa[1].ostot
+                break;
+            case 2:
+                Stats[0].PerClick = Kauppa[0].ostot*Kauppa[1].ostot
+                break;
+            case 3:
+                Stats[2].kerroinPerCombo = 1 + Kauppa[2].ostot
+                break;
+            case 4:
+                Stats[2].maksimi_elinaika = Kauppa[3].ostot
+                break;
+            case 5:
+                Hidden_Stats[1].määrä = Kauppa[4].ostot
+                break;
+            case 6:
+                Hidden_Stats[0].määrä = Hidden_Stats[0].määrä - Kauppa[5].ostot
+                break;
+            case 7:
+                Hidden_Stats[2].määrä = Kauppa[6].ostot
+                if (Hidden_Stats[2].määrä > 0) {
+                    Hidden_Stats[2].aktiivinen = true
+                }
+                break;
+            case 8:
+                Hidden_Stats[3].määrä = Kauppa[7].ostot
+                if (Hidden_Stats[3].määrä > 0) {
+                    Hidden_Stats[3].aktiivinen = true
+                }
+                break;
+            case 9:
+                Stats[2].PerClick = Kauppa[8].ostot
+                break;
+            case 10:
+                if (Kauppa[9].ostot > 0) {
+                    Hidden_Stats[4].aktiivinen = true
+                }
+                break;
+            case 11:
+                Stats[4].määrä = Kauppa[10].ostot + Hidden_Stats[5].määrä * (Hidden_Stats[6].määrä + 1)
+                break;
+            case 12:
+                Hidden_Stats[5].määrä = Kauppa[11].ostot
+                break;
+            case 13:
+                Hidden_Stats[6].määrä = Kauppa[12].ostot
+                break;
+            case 14:
+                Hidden_Stats[7].määrä = Kauppa[13].ostot
+                break;
+            case 15:
+                if (Kauppa[14].ostot > 0) {
+                    Hidden_Stats[8].aktiivinen = true
+                }
+                break;
+            case 16:
+                // Ei tee mitään.
+                break;
+        }
+    UpdateAll()
+    }
+    
+}
+function cooldown() {
+    Hidden_Stats[0].aktiivinen = false
+    document.getElementById("Collector").style.pointerEvents = "none"
+    setTimeout(cooldown_end, Hidden_Stats[0].määrä) 
 
+}
+function cooldown_end() {
+    Hidden_Stats[0].aktiivinen = true
+    document.getElementById("Collector").style.pointerEvents = "auto"
+}
+window.onload = function() {
+    Sekuntti_tuottajat();
+};
+
+function Sekuntti_tuottajat() {
+    setInterval(Trigger_All, 1000);
+}
+
+function Trigger_All() {
+    AutoClicker();
+    Orjat();
+    UpdateAll();
+}
+function Autoclicker() {
+    Pressed()
+}
+function Orjat() {
+    Stats[0].määrä += Stats[4].määrä
+    Hidden_Stats[5].määrä += Kauppa[11].ostot
 }
