@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../Grafiikat/tyylit.css">
 </head>
 <body>
-    <img src="../Grafiikat/Kuvat/Collector.png" id="Collector" onclick="Pressed()">
+    <img src="../Grafiikat/Kuvat/Collector.png" id="Collector" onclick="Pressed()" draggable="false">
     <div id="Stats_panel">
         <div id="stats">
             <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
@@ -45,14 +45,14 @@
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
     <span id="ostot2"></span><br>
 
-    <img src="../Grafiikat/Kuvat/Voimakkaampi_combo.png" onclick="Ostatuote(3)">
-    <span id="tuote3">Voimakkaampi combo: +1x kerroin per <img src="../Grafiikat/Kuvat/Combo.png"></span><br>
+    <img src="../Grafiikat/Kuvat/Ikuinen_Elinikä.png" onclick="Ostatuote(3)">
+    <span id="tuote3">Ikuinen combo: +0.01 sekuntti combon elinaikaa</span><br>
     <span id="hinta3"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
     <span id="ostot3"></span><br>
 
-    <img src="../Grafiikat/Kuvat/Ikuinen_Elinikä.png" onclick="Ostatuote(4)">
-    <span id="tuote4">Ikuinen combo: +0.001 sekuntti combon elinaikaa</span><br>
+    <img src="../Grafiikat/Kuvat/Voimakkaampi_combo.png" onclick="Ostatuote(4)">
+    <span id="tuote4">Voimakkaampi combo: +1x kerroin per <img src="../Grafiikat/Kuvat/Combo.png"></span><br>
     <span id="hinta4"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
     <span id="ostot4"></span><br>
@@ -68,7 +68,7 @@
     <span id="title">Collector Kauppa</span><br>
 
     <img src="../Grafiikat/Kuvat/Nopeampi_lataus.png" onclick="Ostatuote(6)">
-    <span id="tuote6">Nopeampi lataus: -0.001 sekuntti napin lataukseen</span><br>
+    <span id="tuote6">Nopeampi lataus: -10% napin lataukseen</span><br>
     <span id="hinta6"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
     <span id="ostot6"></span><br>
@@ -121,7 +121,7 @@
     <span id="ostot13"></span><br>
 
     <img src="../Grafiikat/Kuvat/Äijä_tehdas.png" onclick="Ostatuote(14)">
-    <span id="tuote14">Rakenna Äijä tehdas: +100 äijää per sekuntti</span><br>
+    <span id="tuote14">Rakenna Äijä tehdas: 2x äijää per sekuntti</span><br>
     <span id="hinta14"></span>
     <img src="../Grafiikat/Kuvat/Sahko.png" alt="Sähkö">
     <span id="ostot14"></span><br>
@@ -151,6 +151,7 @@
     <img src="../Grafiikat/Kuvat/Pistorasia.png" alt="Pistorasia">
     <span id="Vinkki" hidden></span>
 </div>
+
 </body>
 <script src="../Koodi/Koodi.js"></script>
 </html>

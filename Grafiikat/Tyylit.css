@@ -76,6 +76,7 @@ span {
 }
 img[onclick] {
     cursor: pointer;
+    user-select: none;
 }
 
 #Bulk {
@@ -98,4 +99,8 @@ img[onclick] {
     font-size: 50px;
     width: auto;  /* Ei tarvitse 100% leveyttä */
     height: auto; /* Ei tarvitse 100% korkeutta */
+}
+
+img {
+    user-select: none;
 }
