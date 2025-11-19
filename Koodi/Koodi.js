@@ -10,26 +10,24 @@ const Hidden_Stats = [
     {nimi: "Cooldown", määrä: 500, aktiivinen: true},
     {nimi: "Alennus", määrä: 0},
     {nimi: "Autoclicker", määrä: 0, cooldown: 1000, aktiivinen: false, loop: null},
-    {nimi: "Onnekas kosketus", määrä: 0, aktiivinen: false},
-    {nimi: "F.O.R.K", aktiivinen: false},
-    {nimi: "Pelottavin Pistorasia", määrä: 0, aktiivinen: false},
+    {nimi: "Onnekas kosketus", määrä: 0, aktiivinen: false}
 ];
 
 const Kauppa = [
-    {id: 1, hinta: 100, ostot: 0, maksimi: 999},
-    {id: 2, hinta: 1000000, ostot: 0, maksimi: 10},
-    {id: 3, hinta: 2500000, ostot: 0, maksimi: 900},
-    {id: 4, hinta: 100000000, ostot: 0, maksimi: 9},           
-    {id: 5, hinta: 999999999999999, ostot: 0, maksimi: 101},
-    {id: 6, hinta: 10, ostot: 0, maksimi: 10},
-    {id: 7, hinta: 1000, ostot: 0, maksimi: 10},
+    {id: 1, hinta: 1000, ostot: 0, maksimi: 999},
+    {id: 2, hinta: 1000000, ostot: 0, maksimi: 9},
+    {id: 3, hinta: 2500000, ostot: 0, maksimi: Infinity},
+    {id: 4, hinta: 7500000, ostot: 0, maksimi: 9},           
+    {id: 5, hinta: 1e+50, ostot: 0, maksimi: 101},
+    {id: 6, hinta: 2, ostot: 0, maksimi: 10},
+    {id: 7, hinta: 5000, ostot: 0, maksimi: 1},
     {id: 8, hinta: 200000, ostot: 0, maksimi: 250},
     {id: 9, hinta: 1000000, ostot: 0, maksimi: Stats[2].maksimi},
     {id: 10, hinta: Infinity, ostot: 0, maksimi: 1},
-    {id: 11, hinta: 100, ostot: 0, maksimi: 1},
-    {id: 12, hinta: 1000000, ostot: 0, maksimi: 10},
-    {id: 13, hinta: 6666666, ostot: 0, maksimi: 100},
-    {id: 14, hinta: 7500000000, ostot: 0, maksimi: 1},
+    {id: 11, hinta: 100, ostot: 0, maksimi: 10},
+    {id: 12, hinta: 1000, ostot: 0, maksimi: 10},
+    {id: 13, hinta: 66666666, ostot: 0, maksimi: Infinity},
+    {id: 14, hinta: 7500000000000000, ostot: 0, maksimi: 1},
     {id: 15, hinta: Infinity, ostot: 0, maksimi: 1},
     {id: 16, hinta: Infinity, ostot: 0, maksimi: Infinity}
 ];
@@ -40,7 +38,9 @@ const Keybinds = [
     {nimi: "Sähkökauppa hotkey", nappi: "r"},
     {nimi: "Collectorkauppa hotkey", nappi: "t"},
     {nimi: "Tukikauppa hotkey", nappi: "y"},
-    {nimi: "Loadsa moneh", nappi: "m"}
+    // dev keys
+    {nimi: "Loadsa moneh", nappi: "m"},
+    {nimi: "Loadsa clicks", nappi: "n"}
 ];
 
 let OstoKerroin = 1;
@@ -53,7 +53,6 @@ let BaseOrjat = 0;
 let SupOrjat = 0;
 let ExpOrjat = 0;
 
-// --- EVENT LISTENER ---
 document.addEventListener("keydown", (event) => {
     switch (event.key.toLowerCase()) {
         case Keybinds[0].nappi:
@@ -74,11 +73,11 @@ document.addEventListener("keydown", (event) => {
         case Keybinds[3].nappi: AvaaCollectorKauppa(); break;
         case Keybinds[4].nappi: AvaaTukiKauppa(); break;
         case Keybinds[5].nappi: Loadsa_Moneh(); break;
+        case Keybinds[6].nappi: Loadsa_Clicks(); break;
     }
     UpdateAll();
 });
 
-// --- UPDATE ---
 function UpdateAll() {
     document.getElementById("Sähkö").innerText = Stats[0].määrä;
     document.getElementById("Cps").innerText = Stats[1].määrä + "/sekunnissa";
@@ -98,7 +97,6 @@ function UpdateAll() {
     });
 }
 
-// --- CLICK ---
 function Pressed() {
     if (!Hidden_Stats[0].aktiivinen) return;
     Click();
@@ -111,8 +109,7 @@ function Click() {
     Stats[0].PerClick = 1 + Mahtava_sähkövoima;
     Stats[0].kerroin = 1 + Ultimaattinen_sähkövoima;
 
-
-    let Trigger = Math.random() < 0.01 * Hidden_Stats[3].määrä ? 10 : 1;
+    let Trigger = Math.random() < 0.01 * Hidden_Stats[3].määrä ? 100 : 1;
     Stats[0].määrä += Stats[0].PerClick * Stats[0].kerroin * Stats[2].kerroin * Trigger;
     Cps();
 }
@@ -132,7 +129,6 @@ function startCpsReset() {
     }
 }
 
-// --- COMBO ---
 function BeginCombo() {
     Stats[2].määrä += Stats[2].PerClick;
     if (Stats[2].määrä > Stats[2].maksimi) Stats[2].määrä = Stats[2].maksimi;
@@ -142,7 +138,7 @@ function BeginCombo() {
 
     if (Started) clearInterval(Started);
 
-    let intervalMs = Math.max(100, Math.floor(Stats[2].maksimi_elinaika / (Stats[2].Skaalaus * Math.max(1, Stats[2].määrä))));
+    let intervalMs = Math.max(100, Math.floor(Stats[2].maksimi_elinaika / (Stats[2].Skaalaus ** Math.max(1, Stats[2].määrä))));
     Started = setInterval(DrainCombo, intervalMs);
 
     UpdateAll();
@@ -160,7 +156,6 @@ function DrainCombo() {
     UpdateAll();
 }
 
-// --- SHOPS ---
 const SK = document.getElementById("SahkoKauppa");
 const CK = document.getElementById("CollectorKauppa");
 const TK = document.getElementById("TukiKauppa");
@@ -181,7 +176,6 @@ function AvaaTukiKauppa() {
     UpdateAll();
 }
 
-// --- COOLDOWN ---
 function cooldown() {
     if (!Hidden_Stats[0].aktiivinen) return;
     Hidden_Stats[0].aktiivinen = false;
@@ -191,39 +185,29 @@ function cooldown() {
     }, Hidden_Stats[0].määrä);
 }
 
-// --- AUTOCLOCKER ---
 function Autoclicker() {
     if (!Hidden_Stats[2].aktiivinen) return;
 
-    // STOP old loop if it exists
     if (Hidden_Stats[2].loop) {
         clearInterval(Hidden_Stats[2].loop);
     }
 
-    // Number of autoclickers
     let count = Math.max(1, Hidden_Stats[2].määrä);
 
-    // Each autoclicker clicks once every (cooldown / count) ms
     let interval = Hidden_Stats[2].cooldown / count;
 
-    // Safety: never go below 10 ms to prevent game freezing
-    interval = Math.max(10, interval);
-
-    // Start new loop
     Hidden_Stats[2].loop = setInterval(() => {
         Pressed();
     }, interval);
 }
-
-// --- ORJAT ---
+let Varkaudet = 0
 function Orjat() {
-    Stats[3].määrä = BaseOrjat * (SupOrjat + 1) + Hidden_Stats[5].määrä * (SupOrjat + 1);
-    Stats[0].määrä += Stats[3].määrä;
-    Hidden_Stats[5].määrä += ExpOrjat * SupOrjat;
+    Stats[3].määrä = (BaseOrjat + Varkaudet) * (SupOrjat + 1);
+    Stats[0].määrä += Stats[3].määrä * Stats[2].kerroin;
+    Varkaudet += ExpOrjat
     UpdateAll();
 }
 
-// --- BUY ITEMS ---
 function Ostatuote(id) {
     let itemIndex = Kauppa.findIndex(x => x.id === id);
     if (itemIndex === -1) return;
@@ -249,6 +233,7 @@ function Ostatuote(id) {
             case 11: BaseOrjat = 10 * Kauppa[itemIndex].ostot; break;
             case 12: ExpOrjat = Kauppa[itemIndex].ostot; break;
             case 13: SupOrjat = Kauppa[itemIndex].ostot; break;
+            case 14: Tehdas(); break;
             case 15: Hidden_Stats[5].aktiivinen = true; break;
         }
 
@@ -257,13 +242,6 @@ function Ostatuote(id) {
     }
 }
 
-// --- MONEY CHEAT ---
-function Loadsa_Moneh() {
-    Stats[0].määrä += 1;
-    Stats[0].määrä *= 999999999999999;
-}
-
-// --- START ---
 window.onload = function() {
     UpdateAll();
     setInterval(Trigger_All, 1000);
@@ -273,4 +251,22 @@ window.onload = function() {
 function Trigger_All() {
     Orjat();
     UpdateAll();
+    Tehdas()
+}
+
+function Tehdas() {
+    if (Kauppa[13].ostot === 0) return;
+    Kauppa[10].ostot *= 1000
+    BaseOrjat = Kauppa[10].ostot;
+    Orjat();
+    UpdateAll();
+}
+
+function Loadsa_Moneh() {
+    Stats[0].määrä += 1;
+    Stats[0].määrä *= 999999999999999;
+}
+
+function Loadsa_Clicks() {
+    Pressed()
 }
