@@ -66,9 +66,9 @@ span {
 }
 #Haarukka {
     position: fixed;
-    top: 5%;
+    top: 20%;
     left: 70%;
-    cursor: default;
+    cursor: grab;
 }
 
 #title {
@@ -76,7 +76,6 @@ span {
 }
 img[onclick] {
     cursor: pointer;
-    user-select: none;
 }
 
 #Bulk {
@@ -101,6 +100,7 @@ img[onclick] {
     height: auto; /* Ei tarvitse 100% korkeutta */
 }
 
-img {
+* {
     user-select: none;
 }
+

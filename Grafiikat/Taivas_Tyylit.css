@@ -1,0 +1,16 @@
+* {
+    user-select: none;
+}
+body {
+    background-image: url("../Grafiikat/Kuvat/Taivas.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#stats {
+    border: solid 1px orangered;
+    box-shadow: inset 0px 0px 10px orange, 0px 0px 10px orange;
+    width: auto;
+    height: auto;
+}

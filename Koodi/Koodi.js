@@ -13,23 +13,28 @@ const Hidden_Stats = [
     {nimi: "Onnekas kosketus", määrä: 0, aktiivinen: false}
 ];
 
+const Unlocks = [
+    {nimi: "haarukka", aktiivinen: false},
+    {nimi: "pistorasia", aktiivinen: false}
+]
+
 const Kauppa = [
-    {id: 1, hinta: 1000, ostot: 0, maksimi: 999},
-    {id: 2, hinta: 1000000, ostot: 0, maksimi: 9},
-    {id: 3, hinta: 2500000, ostot: 0, maksimi: Infinity},
-    {id: 4, hinta: 7500000, ostot: 0, maksimi: 9},           
-    {id: 5, hinta: 1e+50, ostot: 0, maksimi: 101},
-    {id: 6, hinta: 2, ostot: 0, maksimi: 10},
-    {id: 7, hinta: 5000, ostot: 0, maksimi: 1},
-    {id: 8, hinta: 200000, ostot: 0, maksimi: 250},
-    {id: 9, hinta: 1000000, ostot: 0, maksimi: Stats[2].maksimi},
-    {id: 10, hinta: Infinity, ostot: 0, maksimi: 1},
-    {id: 11, hinta: 100, ostot: 0, maksimi: 10},
-    {id: 12, hinta: 1000, ostot: 0, maksimi: 10},
-    {id: 13, hinta: 66666666, ostot: 0, maksimi: Infinity},
-    {id: 14, hinta: 7500000000000000, ostot: 0, maksimi: 1},
-    {id: 15, hinta: Infinity, ostot: 0, maksimi: 1},
-    {id: 16, hinta: Infinity, ostot: 0, maksimi: Infinity}
+{id: 1, hinta: 10, maksimi_hinta: 10, ostot: 0, maksimi: 999},
+{id: 2, hinta: 1000, maksimi_hinta: 1000, ostot: 0, maksimi: 9},
+{id: 3, hinta: 25000, maksimi_hinta: 25000, ostot: 0, maksimi: Infinity},
+{id: 4, hinta: 750000, maksimi_hinta: 750000, ostot: 0, maksimi: 9},
+{id: 5, hinta: 1e+50, maksimi_hinta: 1e+50, ostot: 0, maksimi: 101},
+{id: 6, hinta: 2, maksimi_hinta: 2, ostot: 0, maksimi: 10},
+{id: 7, hinta: 5000, maksimi_hinta: 5000, ostot: 0, maksimi: 1},
+{id: 8, hinta: 1000000, maksimi_hinta: 1000000, ostot: 0, maksimi: 250},
+{id: 9, hinta: 7500000, maksimi_hinta: 7500000, ostot: 0, maksimi: Stats[2].maksimi},
+{id: 10, hinta: Infinity, maksimi_hinta: Infinity, ostot: 0, maksimi: 1},
+{id: 11, hinta: 50, maksimi_hinta: 50, ostot: 0, maksimi: 10},
+{id: 12, hinta: 250, maksimi_hinta: 250, ostot: 0, maksimi: 10},
+{id: 13, hinta: 6666666, maksimi_hinta: 6666666, ostot: 0, maksimi: Infinity},
+{id: 14, hinta: 75000000000, maksimi_hinta: 75000000000, ostot: 0, maksimi: 1},
+{id: 15, hinta: Infinity, maksimi_hinta: Infinity, ostot: 0, maksimi: 1},
+{id: 16, hinta: Infinity, maksimi_hinta: Infinity, ostot: 0, maksimi: Infinity}
 ];
 
 const Keybinds = [
@@ -95,6 +100,16 @@ function UpdateAll() {
             document.getElementById("ostot" + item.id).innerText = item.ostot + "/" + item.maksimi;
         }
     });
+
+    if (Unlocks[0].aktiivinen === true) {
+        document.getElementById("Haarukka").hidden = false
+    }
+    if (Unlocks[1].aktiivinen === true) {
+        document.getElementById("Pistorasia").hidden = false
+    }
+    if (Unlocks[0].aktiivinen === true && Unlocks[1].aktiivinen === true && Stats[0].määrä < Infinity) {
+        document.getElementById("Anti_softlock").hidden = false
+    }
 }
 
 function Pressed() {
@@ -103,6 +118,7 @@ function Pressed() {
     BeginCombo();
     UpdateAll();
     cooldown();
+    Infinity_Varjelija()
 }
 
 function Click() {
@@ -224,17 +240,17 @@ function Ostatuote(id) {
             case 2: Ultimaattinen_sähkövoima = Kauppa[itemIndex].ostot; break;
             case 3: Stats[2].maksimi_elinaika = 10 * Kauppa[itemIndex].ostot; break;
             case 4: Stats[2].kerroinPerCombo = 1 + Kauppa[itemIndex].ostot; break;
-            case 5: Hidden_Stats[1].määrä = Kauppa[itemIndex].ostot; break;
+            case 5: Hidden_Stats[1].määrä = Kauppa[itemIndex].ostot; Alennus(); break;
             case 6: Hidden_Stats[0].määrä = 500 * (1 - 0.1 * Kauppa[itemIndex].ostot); break;
             case 7: Hidden_Stats[2].aktiivinen = true; Hidden_Stats[2].määrä = Kauppa[itemIndex].ostot; Autoclicker(); break;
             case 8: Hidden_Stats[3].aktiivinen = true; Hidden_Stats[3].määrä = Kauppa[itemIndex].ostot; break;
             case 9: Stats[2].PerClick = Kauppa[itemIndex].ostot; break;
-            case 10: Hidden_Stats[4].aktiivinen = true; break;
+            case 10: Unlocks[0].aktiivinen = true; break;
             case 11: BaseOrjat = 10 * Kauppa[itemIndex].ostot; break;
             case 12: ExpOrjat = Kauppa[itemIndex].ostot; break;
             case 13: SupOrjat = Kauppa[itemIndex].ostot; break;
             case 14: Tehdas(); break;
-            case 15: Hidden_Stats[5].aktiivinen = true; break;
+            case 15: Unlocks[1].aktiivinen = true; break;
         }
 
         Stats[0].PerClick = 1 + Mahtava_sähkövoima * Ultimaattinen_sähkövoima;
@@ -267,6 +283,96 @@ function Loadsa_Moneh() {
     Stats[0].määrä *= 999999999999999;
 }
 
+let RATATATA = null;
+
 function Loadsa_Clicks() {
-    Pressed()
+    if (RATATATA) {
+        clearInterval(RATATATA);
+        RATATATA = null;
+    } else {
+        RATATATA = setInterval(Pressed, 0);
+    }
+}
+
+const Whitelisted = [5, 10, 15, 16]
+let Blackout = false
+function Infinity_Varjelija() {
+    if (Stats[0].määrä > Stats[0].maksimi && !Blackout) {
+        Blackout = true
+        Kauppa.forEach(item => {
+            if (!Whitelisted.includes(item.id)) {
+                item.maksimi = 0;
+                item.ostot = 0;
+            }
+        });
+
+        Stats[0].PerClick = 0;
+        Stats[0].kerroin = 0;
+        Stats[2].maksimi = 0;
+        Stats[3].määrä = 0;
+
+        Hidden_Stats[0].aktiivinen = false;
+        Hidden_Stats[0].määrä = Infinity;
+
+        Hidden_Stats[2].aktiivinen = false;
+        Hidden_Stats[2].määrä = 0;
+        Hidden_Stats[2].cooldown = Infinity;
+        UpdateAll()
+    }
+}
+
+function Alennus() {
+    Kauppa.forEach(item => {
+        if (item.maksimi_hinta === Infinity) {
+            if (Hidden_Stats[1].määrä === 100) {
+                item.hinta = 0;
+            } else if (Hidden_Stats[1].määrä > 100)
+                item.hinta = -Infinity
+            return;
+        }
+
+        item.hinta = item.maksimi_hinta * (1 - (0.01 * Hidden_Stats[1].määrä))
+    });
+}
+
+const Haarukka = document.getElementById("Haarukka");
+const Pistorasia = document.getElementById("Pistorasia");
+
+let Dragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+Haarukka.addEventListener("mousedown", (e) => {
+    Dragging = true;
+    offsetX = e.clientX - Haarukka.offsetLeft;
+    offsetY = e.clientY - Haarukka.offsetTop;
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (!Dragging) return;
+
+    Haarukka.style.left = (e.clientX - offsetX) + "px";
+    Haarukka.style.top  = (e.clientY - offsetY) + "px";
+
+    if (isOverlapping(Haarukka, Pistorasia)) {
+        Ascension();
+    }
+});
+
+document.addEventListener("mouseup", () => {
+    Dragging = false;
+});
+
+function isOverlapping(a, b) {
+    const Avain = a.getBoundingClientRect();
+    const Lukko = b.getBoundingClientRect();
+
+    return !(
+        Avain.right < Lukko.left || Avain.left > Lukko.right || Avain.bottom < Lukko.top || Avain.top > Lukko.bottom
+    );
+}
+
+function Ascension() {
+    localStorage.setItem("sielut", Stats[4].määrä)
+    window.location.href = "Taivas.html";
 }
