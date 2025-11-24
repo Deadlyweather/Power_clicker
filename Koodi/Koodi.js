@@ -45,7 +45,8 @@ const Keybinds = [
     {nimi: "Tukikauppa hotkey", nappi: "y"},
     // dev keys
     {nimi: "Loadsa moneh", nappi: "m"},
-    {nimi: "Loadsa clicks", nappi: "n"}
+    {nimi: "Loadsa clicks", nappi: "n"},
+    {nimi: "Vapauta Jellona", nappi: "b"}
 ];
 
 let OstoKerroin = 1;
@@ -79,6 +80,7 @@ document.addEventListener("keydown", (event) => {
         case Keybinds[4].nappi: AvaaTukiKauppa(); break;
         case Keybinds[5].nappi: Loadsa_Moneh(); break;
         case Keybinds[6].nappi: Loadsa_Clicks(); break;
+        case Keybinds[7].nappi: Vapauta_Jellona(); break;
     }
     UpdateAll();
 });
@@ -292,6 +294,19 @@ function Loadsa_Clicks() {
     } else {
         RATATATA = setInterval(Pressed, 0);
     }
+}
+
+function Vapauta_Jellona() {
+    Jellona = document.getElementById("Jellona")
+    Jellona.hidden = false
+
+    let angle = 0
+
+    setInterval(() => {
+        angle += 5
+        Jellona.style.transform = `rotate(${angle}deg)`
+    }, 16)
+    // setTimeout(Ascension, 1000)
 }
 
 const Whitelisted = [5, 10, 15, 16]

@@ -104,3 +104,15 @@ img[onclick] {
     user-select: none;
 }
 
+#Jellona {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    right: 25%;
+    bottom: 25%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}

@@ -11,6 +11,11 @@ body {
 #stats {
     border: solid 1px orangered;
     box-shadow: inset 0px 0px 10px orange, 0px 0px 10px orange;
-    width: auto;
-    height: auto;
+    font-size: 100px;
+    color: white;
+    text-shadow: 0px 0px 50px yellow;
+    font-style: italic;
+}
+img[onclick] {
+    cursor: pointer;
 }
