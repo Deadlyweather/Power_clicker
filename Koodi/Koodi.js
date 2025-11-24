@@ -264,6 +264,11 @@ window.onload = function() {
     UpdateAll();
     setInterval(Trigger_All, 1000);
     startCpsReset();
+    if (Number(localStorage.getItem("kuolemat")) > 0) {
+        document.getElementById("Sieluja").hidden = false
+        document.getElementById("Sieluja_2").hidden = false
+        Stats[4].määrä = Number(localStorage.getItem("sielut"))
+    }
 };
 
 function Trigger_All() {
@@ -301,12 +306,13 @@ function Vapauta_Jellona() {
     Jellona.hidden = false
 
     let angle = 0
-
+    let stretch = 1
     setInterval(() => {
-        angle += 5
-        Jellona.style.transform = `rotate(${angle}deg)`
+        angle += 1
+        stretch += 0.1
+        Jellona.style.transform = `rotate(${angle}deg) skew(${angle}deg) scale(${stretch})`
     }, 16)
-    // setTimeout(Ascension, 1000)
+    setTimeout(Ascension, 1000)
 }
 
 const Whitelisted = [5, 10, 15, 16]
@@ -390,4 +396,8 @@ function isOverlapping(a, b) {
 function Ascension() {
     localStorage.setItem("sielut", Stats[4].määrä)
     window.location.href = "Taivas.html";
+}
+function Reset() {
+    localStorage.clear()
+    window.location.reload()
 }
