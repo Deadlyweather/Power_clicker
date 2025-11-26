@@ -375,8 +375,8 @@ document.addEventListener("mousemove", (e) => {
     Haarukka.style.left = (e.clientX - offsetX) + "px";
     Haarukka.style.top  = (e.clientY - offsetY) + "px";
 
-    if (isOverlapping(Haarukka, Pistorasia)) {
-        Ascension();
+    if (isOverlapping(Haarukka, Pistorasia) && Stats[0].määrä === Infinity) {
+        Kuolema();
     }
 });
 
@@ -393,6 +393,20 @@ function isOverlapping(a, b) {
     );
 }
 
+let transparency = 0
+function Kuolema() {
+    let Tuli = document.getElementById("Tuli")
+    Tuli.hidden = false
+    setInterval(() =>{
+        transparency += 0.1
+        if (transparency < 1.1) {
+            Tuli.style.opacity = transparency
+        } else {
+            Ascension()
+        }
+    },500)
+}
+    
 function Ascension() {
     localStorage.setItem("sielut", Stats[4].määrä)
     window.location.href = "Taivas.html";

@@ -9,16 +9,33 @@
 <body>
     <img id="Palautus" src="../Grafiikat/Kuvat/Palautus.png" onclick="Uusi_Elämä()">
     <div id="stats">
-        <img src="../Grafiikat/Kuvat/Sielu.png"><span id="Sieluja">0</span><br>
-        <img src="../Grafiikat/Kuvat/Kuolema.png"><span id="Kuolemia">0</span>
+        <div class="stats-row">
+            <img src="../Grafiikat/Kuvat/Sielu.png">
+            <span id="Sieluja">0</span>
+        </div>
+
+        <div class="stats-row">
+            <img src="../Grafiikat/Kuvat/Kuolema.png">
+            <span id="Kuolemia">0</span>
+        </div>
     </div>
     <div id="Ascension_Kauppa">
-        <img src="kuvaX.png">
+        <img src="../Grafiikat/Kuvat/Taivas_Upgrade.png">
         <span id="title">Taivaan kauppa</span>
     </div>
     <div id="Skill_Tree">
+        <img id="Skill_Upgrades" src="../Grafiikat/Kuvat/Skill_Tree.png">
+        <span id="title">Taito puu</span>
+
+        <div class="points">
+            <img id="Taito_pisteet" src="../Grafiikat/Kuvat/Taito_pisteet.png">
+            <span id="Pisteet_title">Pisteet:</span>
+            <span id="Pisteet">0</span>
+        </div>
     </div>
     <img id="Jumpscare" src="../Grafiikat/Kuvat/Jumpscare.png" hidden>
+    <img id="Juoma" src="../Grafiikat/Kuvat/Juoma.png" hidden>
+    <img id="Doom" src="../Grafiikat/Kuvat/Doom.png" hidden>
 </body>
 <script src="../Koodi/Taivas.js"></script>
 </html>

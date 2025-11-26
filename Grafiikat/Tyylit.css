@@ -116,3 +116,21 @@ img[onclick] {
     top: 80%;
     left: 80%;
 }
+#Tuli {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+}
+
+#Doom {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
