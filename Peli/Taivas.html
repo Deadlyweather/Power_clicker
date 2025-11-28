@@ -9,29 +9,112 @@
 <body>
     <img id="Palautus" src="../Grafiikat/Kuvat/Palautus.png" onclick="Uusi_Elämä()">
     <div id="stats">
-        <div class="stats-row">
+        <div>
             <img src="../Grafiikat/Kuvat/Sielu.png">
             <span id="Sieluja">0</span>
         </div>
 
-        <div class="stats-row">
+        <div>
             <img src="../Grafiikat/Kuvat/Kuolema.png">
             <span id="Kuolemia">0</span>
         </div>
     </div>
     <div id="Ascension_Kauppa">
-        <img src="../Grafiikat/Kuvat/Taivas_Upgrade.png">
+        <img src="../Grafiikat/Kuvat/Taivas_Upgrade.png"><br>
         <span id="title">Taivaan kauppa</span>
+
+
+        <div class="tuote">
+            <img src="../Grafiikat/Kuvat/Taivas_Nappi.png" onclick="Osta(1)">
+            <img src="../Grafiikat/Kuvat/Sieluium_Harkko.png">
+            <span id="määrä1">0</span><br>
+            <img src="../Grafiikat/Kuvat/Koti_sielu.png">
+            <span id="hinta1">0</span><br>
+            <span id="Vaikutus1">Seilium Kaivos: + 1 sielua per kuolema</span>
+        </div>
+
+
+        <div class="tuote">
+            <img src="../Grafiikat/Kuvat/Taivas_Nappi.png" onclick="Osta(2)">
+            <img src="../Grafiikat/Kuvat/Sormi_Hirviö.png">
+            <span id="määrä2">0</span><br>
+            <img src="../Grafiikat/Kuvat/Koti_sielu.png">
+            <span id="hinta2">0</span><br>
+            <span id="Vaikutus2">Sormi_Hirviö: + 1 klikkausta per klikkaus</span>
+            <span id="Ostot2"></span>
+        </div>
+
+
+        <div class="tuote">
+            <img src="../Grafiikat/Kuvat/Taivas_Nappi.png" onclick="Osta(3)">
+            <img src="../Grafiikat/Kuvat/Sielu_varasto.png">
+            <span id="määrä3">0</span><br>
+            <img src="../Grafiikat/Kuvat/Koti_sielu.png">
+            <span id="hinta3">0</span><br>
+            <span id="Vaikutus3">Sielu_varasto: + 1 x sielua per kuolema</span>
+            <span id="Ostot3"></span>
+        </div>
+
+
+        <div class="tuote">
+            <img src="../Grafiikat/Kuvat/Taivas_Nappi.png" onclick="Osta(4)">
+            <img src="../Grafiikat/Kuvat/Tappaja.png">
+            <span id="määrä4">0</span><br>
+            <img src="../Grafiikat/Kuvat/Koti_sielu.png">
+            <span id="hinta4">0</span><br>
+            <span id="Vaikutus4">Äijä murhaaja: + 1 sielua per sekuntti</span>
+            <span id="Ostot4"></span>
+        </div>
+
+
+        <div class="tuote">
+            <img src="../Grafiikat/Kuvat/Taivas_Nappi.png" onclick="Osta(5)">
+            <img src="../Grafiikat/Kuvat/Sielun_Kerääjä.png">
+            <span id="määrä5">0</span><br>
+            <img src="../Grafiikat/Kuvat/Koti_sielu.png">
+            <span id="hinta5">0</span><br>
+            <span id="Vaikutus5">B.O.Y Autoilija: + 1 x sielua per sekuntti</span>
+            <span id="Ostot5"></span>
+        </div>
+
+
+        <div class="tuote">
+            <img src="../Grafiikat/Kuvat/Taivas_Nappi.png" onclick="Osta(6)">
+            <img src="../Grafiikat/Kuvat/Joku_Outo_Reliikki.png">
+            <span id="määrä6">0</span><br>
+            <img src="../Grafiikat/Kuvat/Koti_sielu.png">
+            <span id="hinta6">0</span><br>
+            <span id="Vaikutus6">Joku_Outo_Reliikki: satunnainen vaikutus joka minuutti</span>
+            <span id="Ostot6"></span>
+        </div>
+
+
+        <div class="tuote">
+            <img src="../Grafiikat/Kuvat/Taivas_Nappi.png" onclick="Osta(7)">
+            <img src="../Grafiikat/Kuvat/Cheats.png">
+            <span id="määrä7">0</span><br>
+            <img src="../Grafiikat/Kuvat/Koti_sielu.png">
+            <span id="hinta7">0</span><br>
+            <span id="Vaikutus7">Huijaukset: Kaikki resurssit ovat loputtomia</span>
+            <span id="Ostot7"></span>
+        </div>
+
+
+        <div class="tuote">
+            <img src="../Grafiikat/Kuvat/Taivas_Nappi.png" onclick="Osta(8)">
+            <img src="../Grafiikat/Kuvat/Melvin – kopio.png">
+            <span id="määrä8">0</span><br>
+            <img src="../Grafiikat/Kuvat/Koti_sielu.png">
+            <span id="hinta8">0</span><br>
+            <span id="Vaikutus8">Kalja ja nyrkkirauta: Haasta Mahtava Melvin</span>
+            <span id="Ostot8"></span>
+        </div>
     </div>
     <div id="Skill_Tree">
-        <img id="Skill_Upgrades" src="../Grafiikat/Kuvat/Skill_Tree.png">
-        <span id="title">Taito puu</span>
-
-        <div class="points">
-            <img id="Taito_pisteet" src="../Grafiikat/Kuvat/Taito_pisteet.png">
-            <span id="Pisteet_title">Pisteet:</span>
-            <span id="Pisteet">0</span>
-        </div>
+        <img src="../Grafiikat/Kuvat/Skill_Tree.png"><br>
+        <img src="../Grafiikat/Kuvat/Taito_Pisteet.png"><br>
+        <span>Pisteet:</span>
+        <span id="Taito_Pisteet">0</span><br>
     </div>
     <img id="Jumpscare" src="../Grafiikat/Kuvat/Jumpscare.png" hidden>
     <img id="Juoma" src="../Grafiikat/Kuvat/Juoma.png" hidden>

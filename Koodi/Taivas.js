@@ -12,7 +12,7 @@ let SkillTree = [
 let Keybinds = [
     // dev buttons
     {nimi: "Insta_Death", nappi: "b"},
-    {nimi: "Oispa_Kaljaa", nappi: "n"}
+    {nimi: "Final_showdown", nappi: "n"}
 ]
 document.addEventListener("keydown", (event) => {
     switch (event.key.toLowerCase()) {
@@ -20,7 +20,7 @@ document.addEventListener("keydown", (event) => {
             Insta_Death()
             break;
         case Keybinds[1].nappi:
-            Juoma()
+            Final_showdown()
             break;
     }
     UpdateAll();
@@ -105,25 +105,6 @@ function Insta_Death() {
     Lisää_Kuolemia()
     Lisää_Sieluja()
     HeartAttack()
-}
-let rotation = 0
-let size = 1
-let visiblity = 1
-function Juoma() {
-    let Juoma = document.getElementById("Juoma")
-    setInterval(() => {
-        Juoma.hidden = false
-        rotation += 1
-        size *= 1.005
-        visiblity -= 0.001
-        Juoma.style.transform = `rotate(${rotation}deg) scale(${size})`
-        Juoma.style.opacity = visiblity
-    },16)
-    setTimeout(Doom, 10000)
-    setTimeout(Final_showdown, 15000)
-}
-function Doom() {
-    document.getElementById("Doom").hidden = false
 }
 function Final_showdown() {
     window.location.href = "Melvin.html"
