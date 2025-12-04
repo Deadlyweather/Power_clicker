@@ -3,12 +3,32 @@ let TaivasStats = [
     {nimi: "Sielut", määrä: 0, PerKuolema: 1},
     {nimi: "Pisteet", määrä: 0}
 ]
+
 let TaivasKauppa = [
-    {id: 1, hinta: 0, ostot: 0}
-]
+    {id: 1, hinta: 1, ostot: 0},   // Seilium kaivos
+    {id: 2, hinta: 25, ostot: 0},   // Sormi hirviö
+    {id: 3, hinta: 50, ostot: 0},   // Sielu varasto
+    {id: 4, hinta: 10000, ostot: 0},  // Äijä murhaaja
+    {id: 5, hinta: 150000, ostot: 0},  // B.O.Y autoilija
+    {id: 6, hinta: 250000, ostot: 0},  // Reliikki
+    {id: 7, hinta: 999999999, ostot: 0},  // Huijaukset (kaikki loputtomia)
+    {id: 8, hinta: Infinity, ostot: 0},  // Melvin-haaste
+];
+
 let SkillTree = [
-    {id: 1, hinta: 0, ostot: 0}
-]
+    {id: 1, hinta: 1, ostot: 0},
+    {id: 2, hinta: 1, ostot: 0},
+    {id: 3, hinta: 1, ostot: 0},
+    {id: 4, hinta: 1, ostot: 0},
+    {id: 5, hinta: 1, ostot: 0},
+    {id: 6, hinta: 1, ostot: 0},
+    {id: 7, hinta: 1, ostot: 0},
+    {id: 8, hinta: 1, ostot: 0},
+    {id: 9, hinta: 1, ostot: 0},
+    {id: 10, hinta: 1, ostot: 0},
+    {id: 11, hinta: 1, ostot: 0},
+    {id: 12, hinta: 1, ostot: 0}
+];
 let Keybinds = [
     // dev buttons
     {nimi: "Insta_Death", nappi: "b"},
@@ -33,9 +53,15 @@ function Uusi_Elämä() {
     window.location.href = "index.html";
 }
 function UpdateAll() {
-    document.getElementById("Kuolemia").innerText = TaivasStats[0].määrä,
-    document.getElementById("Sieluja").innerText = TaivasStats[1].määrä//,
-    //document.getElementById("").innerText = TaivasStats[2].määrä
+    const kuolemiaEl = document.getElementById("Kuolemia");
+    const sielujaEl = document.getElementById("Sieluja");
+    const pisteetEl = document.getElementById("Taito_Pisteet");
+
+    if (kuolemiaEl) kuolemiaEl.innerText = TaivasStats[0].määrä;
+    if (sielujaEl) sielujaEl.innerText = TaivasStats[1].määrä;
+    if (pisteetEl) pisteetEl.innerText = TaivasStats[2].määrä;
+
+    UpdateSkillsUI();
 }
 window.onload = function() {
 
@@ -51,6 +77,8 @@ window.onload = function() {
 
     Lisää_Sieluja();
     Lisää_Kuolemia();
+    LoadSkills();
+    UpdateAll();
 }
 let jumpscareFadeInterval = null;
 
@@ -108,4 +136,59 @@ function Insta_Death() {
 }
 function Final_showdown() {
     window.location.href = "Melvin.html"
+}
+
+// Skill tree functions
+function SaveSkills() {
+    const data = {};
+    SkillTree.forEach(s => data[s.id] = s.ostot);
+    localStorage.setItem('taidot', JSON.stringify(data));
+}
+
+function LoadSkills() {
+    const raw = localStorage.getItem('taidot');
+    if (!raw) return;
+    try {
+        const data = JSON.parse(raw);
+        SkillTree.forEach(s => {
+            if (data.hasOwnProperty(s.id)) s.ostot = Number(data[s.id]) || 0;
+        });
+    } catch (e) {
+        console.error('Failed to load skills', e);
+    }
+}
+
+function UpdateSkillsUI() {
+    SkillTree.forEach(s => {
+        const el = document.getElementById('skill' + s.id);
+        if (!el) return;
+        if (s.ostot > 0) {
+            el.style.opacity = '0.5';
+            el.onclick = null;
+            el.setAttribute('data-bought', '1');
+        } else {
+            el.style.opacity = '';
+            el.setAttribute('data-bought', '0');
+        }
+    });
+}
+
+function OstaTaito(id) {
+    const skill = SkillTree.find(s => s.id === id);
+    if (!skill) return;
+    if (skill.ostot > 0) return; // already bought
+
+    const pisteet = TaivasStats[2].määrä;
+    if (pisteet >= skill.hinta) {
+        TaivasStats[2].määrä -= skill.hinta;
+        skill.ostot = 1;
+        SaveSkills();
+        UpdateAll();
+        // Apply simple placeholder effects per skill id (extend as needed)
+        switch(id) {
+            case 1: TaivasStats[1].PerKuolema += 1; break; // more sieluja per kuolema
+            case 2: /* lisää klikkausvoimaa tai muu efekti */ break;
+            default: break;
+        }
+    }
 }

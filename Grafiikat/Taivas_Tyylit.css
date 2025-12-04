@@ -74,3 +74,17 @@ img[onclick] {
     text-align: left;
 }
 
+img[id^="skill"] {
+    width: 100px;
+    height: 100px;
+    margin: 2px;
+    position: relative;
+    display: inline-block;
+}
+
+.Kehys {
+    display: inline-block;
+    background-image: url('../Grafiikat/Kuvat/Kehys.png');
+    background-size: cover;
+    padding: 5px;
+}
