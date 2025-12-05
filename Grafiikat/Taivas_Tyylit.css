@@ -88,3 +88,35 @@ img[id^="skill"] {
     background-size: cover;
     padding: 5px;
 }
+
+.Kehys {
+    position: relative;
+}
+
+#tooltip {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    pointer-events: none;
+    z-index: 10000;
+    max-width: 200px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+#tooltip .hyöty {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+#tooltip .haitta {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+#tooltip .neutraali {
+    color: #ffffff;
+}

@@ -5,32 +5,31 @@ let TaivasStats = [
 ]
 
 let TaivasKauppa = [
-    {id: 1, hinta: 1, ostot: 0},   // Seilium kaivos
-    {id: 2, hinta: 25, ostot: 0},   // Sormi hirviö
-    {id: 3, hinta: 50, ostot: 0},   // Sielu varasto
-    {id: 4, hinta: 10000, ostot: 0},  // Äijä murhaaja
-    {id: 5, hinta: 150000, ostot: 0},  // B.O.Y autoilija
-    {id: 6, hinta: 250000, ostot: 0},  // Reliikki
-    {id: 7, hinta: 999999999, ostot: 0},  // Huijaukset (kaikki loputtomia)
-    {id: 8, hinta: Infinity, ostot: 0},  // Melvin-haaste
+    {id: 1, hinta: 1, ostot: 0},
+    {id: 2, hinta: 25, ostot: 0},
+    {id: 3, hinta: 50, ostot: 0},
+    {id: 4, hinta: 10000, ostot: 0},
+    {id: 5, hinta: 150000, ostot: 0},
+    {id: 6, hinta: 250000, ostot: 0},
+    {id: 7, hinta: 999999999999999999, ostot: 0},
+    {id: 8, hinta: Infinity, ostot: 0},
 ];
 
 let SkillTree = [
-    {id: 1, hinta: 1, ostot: 0},
-    {id: 2, hinta: 1, ostot: 0},
-    {id: 3, hinta: 1, ostot: 0},
-    {id: 4, hinta: 1, ostot: 0},
-    {id: 5, hinta: 1, ostot: 0},
-    {id: 6, hinta: 1, ostot: 0},
-    {id: 7, hinta: 1, ostot: 0},
-    {id: 8, hinta: 1, ostot: 0},
-    {id: 9, hinta: 1, ostot: 0},
-    {id: 10, hinta: 1, ostot: 0},
-    {id: 11, hinta: 1, ostot: 0},
-    {id: 12, hinta: 1, ostot: 0}
+    {id: 1, hinta: 1, ostot: 0, nimi: "Ahneus"},
+    {id: 2, hinta: 1, ostot: 0, nimi: "Vahvuus"},
+    {id: 3, hinta: 1, ostot: 0, nimi: "Viisaus"},
+    {id: 4, hinta: 1, ostot: 0, nimi: "Siunaus"},
+    {id: 5, hinta: 1, ostot: 0, nimi: "Ripeys"},
+    {id: 6, hinta: 1, ostot: 0, nimi: "Kylmyys"},
+    {id: 7, hinta: 1, ostot: 0, nimi: "Kusetuskyky"},
+    {id: 8, hinta: 1, ostot: 0, nimi: "Suurlorvaus"},
+    {id: 9, hinta: 1, ostot: 0, nimi: "Skitsofrenia"},
+    {id: 10, hinta: 1, ostot: 0, nimi: "Kehitys"},
+    {id: 11, hinta: 1, ostot: 0, nimi: "AivoAmoeba"},
+    {id: 12, hinta: 1, ostot: 0, nimi: "Varjelus"},
 ];
 let Keybinds = [
-    // dev buttons
     {nimi: "Insta_Death", nappi: "b"},
     {nimi: "Final_showdown", nappi: "n"}
 ]
@@ -61,7 +60,12 @@ function UpdateAll() {
     if (sielujaEl) sielujaEl.innerText = TaivasStats[1].määrä;
     if (pisteetEl) pisteetEl.innerText = TaivasStats[2].määrä;
 
-    UpdateSkillsUI();
+    TaivasKauppa.forEach(item => {
+        const ostot = document.getElementById(`Ostot${item.id}`);
+        const hinta = document.getElementById(`hinta${item.id}`);
+        if (hinta) hinta.innerText = item.hinta;
+        if (ostot) ostot.innerText = item.ostot;
+    });
 }
 window.onload = function() {
 
@@ -74,7 +78,7 @@ window.onload = function() {
     if (localStorage.getItem("pisteet") !== null) {
         TaivasStats[2].määrä = parseInt(localStorage.getItem("pisteet"));
     }
-
+    Lisää_Pisteitä();
     Lisää_Sieluja();
     Lisää_Kuolemia();
     LoadSkills();
@@ -132,63 +136,97 @@ function Lisää_Kuolemia() {
 function Insta_Death() {
     Lisää_Kuolemia()
     Lisää_Sieluja()
+    Lisää_Pisteitä()
     HeartAttack()
 }
 function Final_showdown() {
     window.location.href = "Melvin.html"
 }
 
-// Skill tree functions
-function SaveSkills() {
-    const data = {};
-    SkillTree.forEach(s => data[s.id] = s.ostot);
-    localStorage.setItem('taidot', JSON.stringify(data));
-}
-
-function LoadSkills() {
-    const raw = localStorage.getItem('taidot');
-    if (!raw) return;
-    try {
-        const data = JSON.parse(raw);
-        SkillTree.forEach(s => {
-            if (data.hasOwnProperty(s.id)) s.ostot = Number(data[s.id]) || 0;
-        });
-    } catch (e) {
-        console.error('Failed to load skills', e);
+function Osta(id) {
+    let ostettava = TaivasKauppa.find(item => item.id === id);
+    if (!ostettava) return;
+    if (TaivasStats[0].määrä >= ostettava.hinta) {
+    } else {
+        return;
     }
-}
-
-function UpdateSkillsUI() {
-    SkillTree.forEach(s => {
-        const el = document.getElementById('skill' + s.id);
-        if (!el) return;
-        if (s.ostot > 0) {
-            el.style.opacity = '0.5';
-            el.onclick = null;
-            el.setAttribute('data-bought', '1');
-        } else {
-            el.style.opacity = '';
-            el.setAttribute('data-bought', '0');
-        }
-    });
 }
 
 function OstaTaito(id) {
-    const skill = SkillTree.find(s => s.id === id);
-    if (!skill) return;
-    if (skill.ostot > 0) return; // already bought
-
-    const pisteet = TaivasStats[2].määrä;
-    if (pisteet >= skill.hinta) {
-        TaivasStats[2].määrä -= skill.hinta;
-        skill.ostot = 1;
-        SaveSkills();
-        UpdateAll();
-        // Apply simple placeholder effects per skill id (extend as needed)
-        switch(id) {
-            case 1: TaivasStats[1].PerKuolema += 1; break; // more sieluja per kuolema
-            case 2: /* lisää klikkausvoimaa tai muu efekti */ break;
-            default: break;
+    let ostettava = SkillTree.find(item => item.id === id);
+    if (!ostettava) return;
+    if (TaivasStats[2].määrä >= ostettava.hinta) {
+        TaivasStats[2].määrä -= ostettava.hinta;
+        ostettava.ostot += 1;
+        ostettava.hinta = ostettava.ostot * 2;
+        if (ostettava.ostot <= 3) {
+            document.getElementById(`skill${id}`).src = `../Grafiikat/Kuvat/${SkillTree[id - 1].nimi}_${"I".repeat(ostettava.ostot)}.png`;
         }
+        UpdateAll();
+    } else {
+        return;
     }
 }
+
+function Lisää_Pisteitä() {
+    TaivasStats[2].määrä += 1
+    UpdateAll()
+}
+
+function ShowTooltip(element, htmlContent) {
+    const tooltip = document.getElementById('tooltip');
+    if (!tooltip) return;
+    
+    tooltip.innerHTML = htmlContent;
+    tooltip.style.display = 'block';
+
+    const rect = element.getBoundingClientRect();
+    tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
+    tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
+}
+
+function HideTooltip() {
+    const tooltip = document.getElementById('tooltip');
+    if (!tooltip) return;
+    tooltip.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const skills = document.querySelectorAll('img[id^="skill"]');
+    skills.forEach((skill, index) => {
+        const skillId = index + 1;
+        const skillData = SkillTree[index];
+        
+        skill.addEventListener('mouseenter', function() {
+            let content;
+            if (skillData.ostot === 0) {
+                content = `<span class="neutraali">Mysteeri</span><br/>
+                          <span class="neutraali">Hinta: ${skillData.hinta} pistettä</span>
+                          <span class="neutraali">Ostot: ${skillData.ostot}</span>
+                          <span class="hyöty"> + Satunnainen bonus vaikutus</span>
+                          <span class="haitta"> - Satunnainen haitta vaikutus</span>`;
+            } else {
+                content = `<span class="neutraali">${skillData.nimi}</span><br/>
+                          <span class="neutraali">Hinta: ${skillData.hinta} pistettä</span>
+                          <span class="neutraali">Ostot: ${skillData.ostot}</span>`;
+            }
+            ShowTooltip(this, content);
+        });
+        
+        skill.addEventListener('mouseleave', HideTooltip);
+        
+        skill.parentElement.addEventListener('focus', function() {
+            let content;
+            if (skillData.ostot === 0) {
+                content = `<span class="neutraali">Mysteeri</span><br/>
+                          <span class="neutraali">Hinta: ${skillData.hinta} pistettä</span>`;
+            } else {
+                content = `<span class="neutraali">${skillData.nimi}</span><br/>
+                          <span class="neutraali">Hinta: ${skillData.hinta} pistettä</span>`;
+            }
+            ShowTooltip(skill, content);
+        });
+        
+        skill.parentElement.addEventListener('blur', HideTooltip);
+    });
+});
