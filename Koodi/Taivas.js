@@ -293,24 +293,14 @@ function Hyöty() {
         elements.forEach(el => {
             let chars = el.textContent.split("");
 
-            chars = chars.map((c, i) => {
+            chars = chars.map((c) => {
                 if (!/[a-zA-Z]/.test(c)) return c;
 
-                // ---- ENSIMMÄINEN KIRJAIN ----
-                if (i === 0) {
-                    // 95% ajasta pysyy isona
-                    if (Math.random() < 0.95) return c.toUpperCase();
-
-                    // 5% ajasta muuttuu pieneksi
-                    return c.toLowerCase();
-                }
-
-                // ---- MUUT KIRJAIMET ----
                 // 97% ajasta ei tehdä mitään
-                if (Math.random() > 0.03) return c;
+                if (Math.random() > 0.1) return c;
 
                 // 0.3% iso kirjain
-                if (Math.random() < 0.003) return c.toUpperCase();
+                if (Math.random() < 0.1) return c.toUpperCase();
 
                 // muulloin pieni
                 return c.toLowerCase();
@@ -359,4 +349,8 @@ function Haitta() {
 function StopHaitta() {
     haittaIntervals.forEach(i => clearInterval(i));
     haittaIntervals = [];
+}
+
+function Sulje() {
+    document.getElementById("Coming_soon").hidden = true;
 }

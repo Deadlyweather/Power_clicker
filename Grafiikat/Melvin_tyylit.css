@@ -4,4 +4,11 @@
 
 body {
     background-image: url(../Grafiikat/Kuvat/Battle_Background.png);
+    background-size: cover;
+    background-position: center;
+}
+img {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
 }

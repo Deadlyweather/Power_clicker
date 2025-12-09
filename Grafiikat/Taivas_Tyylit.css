@@ -120,3 +120,16 @@ img[id^="skill"] {
 #tooltip .neutraali {
     color: #ffffff;
 }
+
+#Coming_soon {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    cursor: pointer;
+    max-width: none;
+    max-height: none;
+    z-index: 10000;
+}
